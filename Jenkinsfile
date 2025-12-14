@@ -1,14 +1,19 @@
 pipeline {
   agent any
 
+  environment {
+    MONGO_URL = credentials('MONGO_URL')
+    PORT = '3000'
+  }
+
   stages {
-    stage('Install Dependencies') {
+    stage('Install') {
       steps {
         bat 'npm install'
       }
     }
 
-    stage('Run Tests') {
+    stage('Test') {
       steps {
         bat 'npm test'
       }
